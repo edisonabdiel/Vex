@@ -5,14 +5,12 @@ import { BsCamera2 } from 'react-icons/bs';
 import { AiTwotonePushpin } from 'react-icons/ai';
 import { FaUserCircle } from 'react-icons/fa';
 import { CgLogOut } from 'react-icons/cg';
-import { GiEyelashes } from 'react-icons/gi';
+import { GiTravelDress, GiShinyPurse, GiBallerinaShoes, GiEyelashes } from 'react-icons/gi';
 
 
-import logo from '../assets/camera_logo.png';
-
-const isActiveStyles = "flex items-center gap-3 px-10 py-5 text-2xl font-extrabold text-black border-r-2 border-black shadow-lg transition-all duration-200 ease-in-out capitalize"
-
+const isActiveStyles = "flex items-center gap-3 px-10 py-5 text-2xl bg-gray-300 font-extrabold text-black border-r-2 border-black shadow-lg transition-all duration-200 ease-in-out capitalize"
 const isNotActiveStyles = "flex items-center px-5 gap-3 text-gray-500 font-bold py-2 px-4 rounded-lg shadow-lg hover:text-black transition-all duration-200 ease-in-out capitalize"
+const iconStyles = "text-2xl text-black"
 
 const Sidebar = ({ user, closeToggle }) => {
 
@@ -20,32 +18,54 @@ const Sidebar = ({ user, closeToggle }) => {
         if (closeToggle) closeToggle(false);
     }
 
-    const categories = [
+
+    const menuItems = [
         {
-            name: 'Discover',
+            name: 'Feed',
             path: '/',
-            icon: <BsCamera2 className="text-2xl text-black" />
+            icon: <BsCamera2 className={iconStyles} />
         },
         {
             name: 'Pins',
             path: '/pins',
-            icon: <AiTwotonePushpin className="text-2xl text-black" />
+            icon: <AiTwotonePushpin className={iconStyles} />
         },
         {
             name: 'Profile',
             path: '/user-profile',
-            icon: <FaUserCircle className="text-2xl text-black" />
+            icon: <FaUserCircle className={iconStyles} />
         },
         {
             name: 'Logout',
             path: '/logout',
-            icon: <CgLogOut className="text-2xl text-black" />
+            icon: <CgLogOut className={iconStyles} />
         },
         {
             name: 'Other',
             path: '/other',
-            icon: <IoIosArrowForward className="text-2xl text-black " />
+            icon: <IoIosArrowForward className="text-2xl text-black" />
         }
+    ]
+
+    const categories = [
+        {
+            name: 'Dresses',
+            path: '/dresses',
+            icon: <GiTravelDress className={iconStyles} />
+        },
+        {
+            name: 'Purses',
+            path: '/purses',
+            icon: <GiShinyPurse className={iconStyles} />
+        },
+        {
+            name: 'Shoes',
+            path: '/shoes',
+            icon: <GiBallerinaShoes className={iconStyles} />
+        },
+
+
+
     ]
 
     return (
@@ -55,21 +75,31 @@ const Sidebar = ({ user, closeToggle }) => {
                     <GiEyelashes className="w-16 text-black text-6xl" />
                 </Link>
                 <div className="flex flex-col gap-5">
-                    <NavLink to="/" className={({ isActive }) => isActive ? isActiveStyles : isNotActiveStyles}>
-                        <GiEyelashes className="text-black" />
-                       VexHub
-                    </NavLink>
-                    {categories.slice(0, categories.length - 1).map(category => (
+                {user && (
+                <NavLink to={`user-profile/${user._id}`} className="flex justify-center items-center my-5 mb-3 gap-2 text-black" onClick={handleCloseSidebar}>
+                    <img src={user.image} alt="user" className="w-12 h-12 rounded-full shadow-lg" />
+                </NavLink>
+            )}
+                    {categories.map(category => (
+                        <NavLink to={`category${category.path}`} className={({ isActive }) => isActive ? isActiveStyles : isNotActiveStyles}>
+                            {category.name}{category.icon}
+                        </NavLink>
+                    ))}
+                    {menuItems.slice(0, menuItems.length - 1).map(menuItem => (
                         <NavLink
-                            to={`category${category.path}`}
+                            to={`category${menuItem.path}`}
                             className={({ isActive }) => isActive ? isActiveStyles : isNotActiveStyles}
-                            key={category.name}
+                            key={menuItem.name}
                             onClick={handleCloseSidebar}
                         >
-                            {category.name} {category.icon}
+                            {menuItem.name} {menuItem.icon}
                         </NavLink>
                     ))}
                 </div>
+            </div>
+            <div className="flex flex-col justify-center items-center my-5 mb-2 gap-2 text-black text-sm">
+                <div>Developed by EdisonAbdiel™</div>
+                <div>{new Date().getFullYear()}</div>
             </div>
         </div>
     )

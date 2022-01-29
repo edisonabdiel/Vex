@@ -50,7 +50,7 @@ const Home = () => {
                             <img src={logo} alt="logo" className="w-28" />
                         </Link>
                         <Link to={`user-profile/${user?._id}`}>
-                            <img src="https://lh3.googleusercontent.com/a-/AOh14Gjj8jdCUEEUaoo3FqJP5AYdPlGX3qpLmXwJ3Kpy=s96-c" alt="user-pic" className="w-9 h-9 rounded-full " />
+                            <img src={user.imagex} alt="user" className="w-9 h-9 rounded-full " />
                         </Link>
                     </div>
                     {toggleSidebar && (
