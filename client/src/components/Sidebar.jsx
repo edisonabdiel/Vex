@@ -77,7 +77,7 @@ const Sidebar = ({ user, closeToggle }) => {
                 <div className="flex flex-col gap-5">
                 {user && (
                 <NavLink to={`user-profile/${user._id}`} className="flex justify-center items-center my-5 mb-3 gap-2 text-black" onClick={handleCloseSidebar}>
-                    <img src={user.image} alt="user" className="w-12 h-12 rounded-full shadow-lg" />
+                    <img src={user.image} alt="user" className="w-12 h-12 rounded-full " />
                 </NavLink>
             )}
                     {categories.map(category => (
