@@ -6,3 +6,5 @@ export { default as Feed } from './Feed';
 export { default as PinDetail } from './PinDetail';
 export { default as CreatePin } from './CreatePin';
 export { default as Search } from './Search';
+export { default as MasonaryLayout } from './MasonaryLayout';
+export { default as Spinner } from './Spinner';

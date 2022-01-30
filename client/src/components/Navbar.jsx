@@ -11,15 +11,17 @@ const Navbar = ({ searchTerm, setSearchTerm, user }) => {
 
     return (
         <div className="flex gap-2 md:gap-5 w-full m-2 ">
+            <Link to="/" className="mt-4">
             <h3 className="flex justify-start items-center text-black font-extrabold text-xl style-font mx-2 ">
                 <span className="evil-font text-4xl">Evil</span>
                 <span className="text-pink-700">Style</span>
             </h3>
+            </Link>
             <div className="flex justify-end items-center w-full p-1 rounded-md border-none outline-none focus-within:shadow-lg">
                 <IoMdSearch fontSize={28} className="m-2 text-black font-extrabold" />
                 <input
                     type="text"
-                    className="w-50 p-1.5 shadow-lg shadow-black/40 text-xl text-white rounded-md"
+                    className="w-50 p-1.5 shadow-lg shadow-black/40 text-lg text-gray-600 border-none outline-none font-extrabold rounded-md"
                     placeholder="Search"
                     value={searchTerm}
                     onFocus={() => navigate('/search')}
@@ -36,7 +38,7 @@ const Navbar = ({ searchTerm, setSearchTerm, user }) => {
                         </Link>
                     )}
                 </div>
-                    <Link to="/create-pin" className="bg-gray-800 rounded-md shadow-lg shadow-cyan-500/30 w-50 h-50 mr-4 hover:animate-ping">
+                    <Link to="/create-pin" className="bg-gray-800 rounded-md shadow-lg shadow-black/40 w-50 h-50 mr-4 hover:animate-ping">
                         <IoIosAdd className="text-2xl text-cyan-600 font-extrabold w-8 h-8" />
                     </Link>
             </div>
