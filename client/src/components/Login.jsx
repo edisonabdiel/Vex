@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { FcGoogle } from 'react-icons/fc';
 // Assets
 import background_video from '../assets/background_video.mp4';
-import camera_logo from '../assets/camera_logo.png';
+import camera_logo from '../assets/heart-logo.png';
 // Sanity middleware
 import { client } from '../client';
 

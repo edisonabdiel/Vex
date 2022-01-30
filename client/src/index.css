@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Mitr:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bungee+Shade&family=Comforter&family=Mitr:wght@300&family=UnifrakturMaguntia&display=swap');
 
 * {
   box-sizing: border-box;
@@ -16,6 +16,18 @@ body {
 
 h1 {
     font-family: 'Mitr', sans-serif;
+}
+
+.dev-name-font{
+    font-family: 'Comforter', cursive;
+}
+
+.evil-font{
+    font-family: 'UnifrakturMaguntia', cursive;
+}
+
+.style-font{
+    font-family: 'Bungee Shade', cursive;
 }
 
 .hide-scrollbar::-webkit-scrollbar {
