@@ -7,8 +7,8 @@ import { CgLogOut } from 'react-icons/cg';
 import { GiTravelDress, GiShinyPurse, GiBootStomp, Gi3DGlasses, GiBleedingHeart, GiHeartNecklace } from 'react-icons/gi';
 
 
-const isActiveStyles = "flex items-center gap-3 px-10 py-5 text-2xl bg-gray-300 font-extrabold text-pink-700 border-r-2 border-black shadow-lg transition-all duration-200 ease-in-out capitalize"
-const isNotActiveStyles = "flex items-center px-5 gap-3 text-gray-500 font-bold py-2 px-4 rounded-lg shadow-lg hover:text-black transition-all duration-200 ease-in-out capitalize"
+const isActiveStyles = "flex items-center gap-3 px-10 py-5 text-2xl bg-gray-300 font-extrabold text-pink-700 border-r-4 rounded-lg border-black shadow-lg transition-all duration-200 ease-in-out capitalize"
+const isNotActiveStyles = "flex items-center px-5 gap-3 text-gray-500 font-bold py-2 px-4 rounded-xl shadow-lg hover:text-black transition-all duration-200 ease-in-out capitalize"
 const iconStyles = "text-2xl text-black"
 
 const Sidebar = ({ user, closeToggle }) => {
