@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { IoIosAdd, IoMdSearch } from 'react-icons/io';
-import { GiPin } from 'react-icons/gi';
 
 const Navbar = ({ searchTerm, setSearchTerm, user }) => {
 

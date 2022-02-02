@@ -1,9 +1,6 @@
 import { NavLink, Link } from 'react-router-dom';
 //Icons
-import { BsCamera2 } from 'react-icons/bs';
-import { AiTwotonePushpin, AiFillCaretDown } from 'react-icons/ai';
-import { FaUserCircle } from 'react-icons/fa';
-import { CgLogOut } from 'react-icons/cg';
+import { AiFillCaretDown } from 'react-icons/ai';
 import { GiTravelDress, GiShinyPurse, GiBootStomp, Gi3DGlasses, GiBleedingHeart, GiHeartNecklace } from 'react-icons/gi';
 
 
@@ -61,7 +58,8 @@ const Sidebar = ({ user, closeToggle }) => {
                     <h4 className="flex justify-center items-center text-black">Discover <AiFillCaretDown /></h4>
                     {categories.map(category => (
                         <NavLink to={`category${category.path}`} className={({ isActive }) => isActive ? isActiveStyles : isNotActiveStyles}>
-                            {category.name}{category.icon}
+                            <span className="evil-font text-xl capitalize">{category.name}</span>
+                            {category.icon}
                         </NavLink>
                     ))}
                 </div>

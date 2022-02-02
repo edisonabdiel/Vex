@@ -15,7 +15,7 @@ const Pin = ({ pin: { postedBy, image, _id, destination, save } }) => {
 
     const [postHovered, setPostHovered] = useState(false);
 
-    
+
 
 
     const user = fetchUser();
@@ -25,14 +25,14 @@ const Pin = ({ pin: { postedBy, image, _id, destination, save } }) => {
     const savePin = (id) => {
         if (!alreadySaved && user) {
             client.patch(id).setIfMissing({ save: [] }).insert('after', 'save[-1]',
-                    [{
-                        _key: uuidv4(),
-                        userId: user?.googleId,
-                        postedBy: {
-                            _type: 'postedBy',
-                            _ref: user?.googleId
-                        },
-                    }]).commit().then(() => {
+                [{
+                    _key: uuidv4(),
+                    userId: user?.googleId,
+                    postedBy: {
+                        _type: 'postedBy',
+                        _ref: user?.googleId
+                    },
+                }]).commit().then(() => {
                     window.location.reload();
                 });
         }
@@ -59,47 +59,72 @@ const Pin = ({ pin: { postedBy, image, _id, destination, save } }) => {
                                     href={`${image?.asset?.url}?dl=`}
                                     download
                                     onClick={(e) => e.stopPropagation()}
-                                    className="text-gray-900 text-4xl opacity-50 hover:opacity-75 hover:animate-bounce"
+                                    className="text-gray-900 text-4xl opacity-50 hover:opacity-75"
                                 >
                                     <MdDownloadForOffline />
                                 </a>
                             </div>
-                        {alreadySaved ? (
-                            <button
-                                type="button"
-                                className="text-black font-extrabold text-base px-5 py-1 rounded-3xl text-2xl bg-red-500 opacity-50 hover:opacity-75 cursor-pointer hover:shadow-lg"
-                            >
-                                {save?.length} Saved
-                            </button>
-                        ) : (
-                            <button
-                                onClick={(e) => {
-                                    e.stopPropagation();
-                                    savePin(_id);
-                                }
-                                }
-                                type="button"
-                                className="text-black font-extrabold text-base px-5 py-1 rounded-3xl text-2xl bg-red-500 opacity-50 hover:opacity-75 cursor-pointer hover:shadow-lg"
-                            >
-                                Save
-                            </button>
-                        )}
+                            {alreadySaved ? (
+                                <button
+                                    type="button"
+                                    className="text-black font-extrabold text-base p-2 rounded-3xl text-2xl bg-green-500 opacity-50 hover:opacity-75 cursor-pointer hover:shadow-lg"
+                                >
+                                    {save?.length} Saved
+                                </button>
+                            ) : (
+                                <button
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        savePin(_id);
+                                    }
+                                    }
+                                    type="button"
+                                    className="text-black font-extrabold text-base px-5 py-1 rounded-3xl text-2xl bg-green-500 opacity-50 hover:opacity-75 cursor-pointer hover:shadow-lg"
+                                >
+                                    Save
+                                </button>
+                            )}
                         </div>
-                        <div className="flex items-center justify-between gap-2 w-full"></div>
-                        {destination && (
-                            <a
-                                href={destination}
-                                target="_blank"
-                                rel="noreferrer"
-                                className="bg-white text-sm rounded-full flex items-center text-gray-900 p-2 pl-4 pr-4 font-extrabold opacity-50 hover:opacity-75 cursor-pointer hover:shadow-lg"
-                            >
-                                <BsFillArrowUpRightCircleFill className="w-6 h-6 mr-2 text-black" />
-                                {destination.length > 20 ? destination.slice(8, 30) : destination.slice(8)}
-                            </a>
-                        )}
+                        <div className="flex items-center justify-between gap-2 w-full">
+                            {destination && (
+                                <a
+                                    href={destination}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    className="bg-white text-sm rounded-full flex items-center text-gray-900 p-2 pl-4 pr-4 font-extrabold opacity-50 hover:opacity-75 cursor-pointer hover:shadow-lg"
+                                >
+                                    <BsFillArrowUpRightCircleFill className="w-6 h-6 mr-2 text-black" />
+                                    {destination.length > 20 ? destination.slice(8, 30) : destination.slice(8)}
+                                </a>
+                            )}
+                            {postedBy?._id === user?.googleId && (
+                                <button
+                                    type="button"
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        client.delete(`${_id}`)
+                                            .commit()
+                                            .then(() => {
+                                                window.location.reload();
+                                            });
+                                    }}
+                                    className="text-black font-extrabold text-base px-5 py-1 rounded-full text-xl bg-red-500 opacity-50 hover:opacity-75 cursor-pointer hover:shadow-lg"
+                                >
+                                    <AiTwotoneDelete className="w-6 h-6 text-black" />
+                                </button>
+                            )}
+                        </div>
                     </div>
                 )}
             </div>
+            <Link to={`user-profile/${user?._id}`} className="flex gap-2 items-center mt-2">
+                <img
+                    className="rounded-full w-8 h-8 object-cover"
+                    src={postedBy?.image}
+                    alt="user"
+                />
+                <p className="font-semibold capitalize text-gray-200 dev-name-font">{postedBy?.userName}</p>
+            </Link>
         </div>
     )
 }
