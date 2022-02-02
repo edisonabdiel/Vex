@@ -17,30 +17,6 @@ const Sidebar = ({ user, closeToggle }) => {
         if (closeToggle) closeToggle(false);
     }
 
-
-    const menuItems = [
-        {
-            name: 'Feed',
-            path: '/',
-            icon: <BsCamera2 className={iconStyles} />
-        },
-        {
-            name: 'Pins',
-            path: '/pins',
-            icon: <AiTwotonePushpin className={iconStyles} />
-        },
-        {
-            name: 'Profile',
-            path: '/user-profile',
-            icon: <FaUserCircle className={iconStyles} />
-        },
-        {
-            name: 'Logout',
-            path: '/logout',
-            icon: <CgLogOut className={iconStyles} />
-        },
-    ]
-
     const categories = [
         {
             name: 'Dresses',
@@ -71,7 +47,7 @@ const Sidebar = ({ user, closeToggle }) => {
     ]
 
     return (
-        <div className="flex flex-col justify-between bg-gray-200 p-2 m-2 overflow-y-scroll min-w-210 hide-scrollbar rounded-md">
+        <div className="flex flex-col justify-between bg-gray-200 p-2 mt-2 ml-2 overflow-y-scroll min-w-210 hide-scrollbar rounded-md">
             <div className="flex flex-col">
                 <Link to="/" className="flex justify-center px-5 gap-2 my-6 pt-1 w-190 items-center" onClick={handleCloseSidebar}>
                     <GiBleedingHeart className="w-16 text-pink-700 text-8xl" />
@@ -88,20 +64,10 @@ const Sidebar = ({ user, closeToggle }) => {
                             {category.name}{category.icon}
                         </NavLink>
                     ))}
-                    {/* {menuItems.slice(0, menuItems.length - 1).map(menuItem => (
-                        <NavLink
-                            to={`category${menuItem.path}`}
-                            className={({ isActive }) => isActive ? isActiveStyles : isNotActiveStyles}
-                            key={menuItem.name}
-                            onClick={handleCloseSidebar}
-                        >
-                            {menuItem.name} {menuItem.icon}
-                        </NavLink>
-                    ))} */}
                 </div>
             </div>
             <div style={{fontSize: '12px'}} className="flex flex-col justify-center items-center my-5 mb-2 gap-2 text-gray-500">
-                <div>Developed by <span className="dev-name-font">EdisonAbdiel™</span></div>
+                <div>Developed by <span className="dev-name-font">EdisonAbdiel ™</span></div>
                 <div>{new Date().getFullYear()}</div>
             </div>
         </div>

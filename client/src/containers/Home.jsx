@@ -11,6 +11,7 @@ import Pins from './Pins';
 import { client } from '../client';
 
 import { userQuery } from '../utils/data';
+import { fetchUser } from '../utils/fetchUser';
 
 import logo from '../assets/camera_logo.png';
 
@@ -22,7 +23,7 @@ const Home = () => {
 
     console.log(user);
 
-    const userInfo = localStorage.getItem('user') !== 'undefined' ? JSON.parse(localStorage.getItem('user')) : null;
+    const userInfo = fetchUser();
 
 
     useEffect(() => {
