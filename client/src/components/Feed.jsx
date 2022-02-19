@@ -8,30 +8,30 @@ import { MasonaryLayout, Spinner } from './';
 
 const Feed = () => {
 
-    const [loding, setLoding] = useState(false);
+    const [loading, setLoading] = useState(false);
     const [pins, setPins] = useState(null);
     const { categoryId } = useParams();
 
 
     useEffect(() => {
         if (categoryId) {
-            setLoding(true);
+            setLoading(true);
             const query = searchQuery(categoryId);
             client.fetch(query)
                 .then(res => {
-                    setLoding(false);
+                    setLoading(false);
                     setPins(res);
                 })
         } else {
             client.fetch(feedQuery)
                 .then(res => {
-                    setLoding(false);
+                    setLoading(false);
                     setPins(res);
                 })
         }
     }, [categoryId])
 
-    if (loding) {
+    if (loading) {
         return <Spinner message={"We're adding new ideas to your feed!"} />
     }
 

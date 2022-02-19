@@ -1,47 +1,20 @@
 import { NavLink, Link } from 'react-router-dom';
 //Icons
 import { AiFillCaretDown } from 'react-icons/ai';
-import { GiTravelDress, GiShinyPurse, GiBootStomp, Gi3DGlasses, GiBleedingHeart, GiHeartNecklace } from 'react-icons/gi';
+import { GiBleedingHeart } from 'react-icons/gi';
+//Categories
+import { categories } from '../utils/categories';
 
 
 const isActiveStyles = "flex items-center gap-3 px-10 py-5 text-2xl bg-gray-300 font-extrabold text-pink-700 border-r-4 rounded-lg border-black shadow-lg transition-all duration-200 ease-in-out capitalize"
 const isNotActiveStyles = "flex items-center px-5 gap-3 text-gray-500 font-bold py-2 px-4 rounded-xl shadow-lg hover:text-black transition-all duration-200 ease-in-out capitalize"
-const iconStyles = "text-2xl text-black"
+
 
 const Sidebar = ({ user, closeToggle }) => {
 
     const handleCloseSidebar = () => {
         if (closeToggle) closeToggle(false);
     }
-
-    const categories = [
-        {
-            name: 'Dresses',
-            path: '/dresses',
-            icon: <GiTravelDress className={iconStyles} />
-        },
-        {
-            name: 'Purses',
-            path: '/purses',
-            icon: <GiShinyPurse className={iconStyles} />
-        },
-        {
-            name: 'Shoes',
-            path: '/shoes',
-            icon: <GiBootStomp className={iconStyles} />
-        },
-        {
-            name: 'Glasses',
-            path: '/sunglasses',
-            icon: <Gi3DGlasses className={iconStyles} />
-        },
-        {
-            name: 'Other',
-            path: '/other',
-            icon: <GiHeartNecklace className={iconStyles} />
-        }
-
-    ]
 
     return (
         <div className="flex flex-col justify-between bg-gray-200 p-2 mt-2 ml-2 overflow-y-scroll min-w-210 hide-scrollbar rounded-md">
@@ -56,8 +29,8 @@ const Sidebar = ({ user, closeToggle }) => {
                         </NavLink>
                     )} */}
                     <h4 className="flex justify-center items-center text-black">Discover <AiFillCaretDown /></h4>
-                    {categories.map(category => (
-                        <NavLink to={`category${category.path}`} className={({ isActive }) => isActive ? isActiveStyles : isNotActiveStyles}>
+                    {categories.map((category, index) => (
+                        <NavLink to={`category${category.path}`} key={index} className={({ isActive }) => isActive ? isActiveStyles : isNotActiveStyles}>
                             <span className="evil-font text-xl capitalize">{category.name}</span>
                             {category.icon}
                         </NavLink>

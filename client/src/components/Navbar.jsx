@@ -20,7 +20,7 @@ const Navbar = ({ searchTerm, setSearchTerm, user }) => {
                 <IoMdSearch fontSize={28} className="m-2 text-black font-extrabold" />
                 <input
                     type="text"
-                    className="w-50 p-1.5 shadow-lg shadow-black/40 text-lg text-gray-600 border-none outline-none font-extrabold rounded-md"
+                    className="w-50 p-1.5 shadow-md shadow-black/40 text-lg text-gray-600 border-none outline-none font-extrabold rounded-md"
                     placeholder="Search"
                     value={searchTerm}
                     onFocus={() => navigate('/search')}
@@ -30,14 +30,14 @@ const Navbar = ({ searchTerm, setSearchTerm, user }) => {
                     {user && (
                         <Link
                             to={`user-profile/${user?._id}`}
-                            className="m-2  gap-2 hidden md:block"
+                            className="m-2 gap-2 hidden md:block"
                         >
-                            <img src={user.image} alt="user" className="w-12 h-12 shadow-lg shadow-black/60 rounded-full" />
+                            <img src={user.image} alt="user" className="w-12 h-12 shadow-md shadow-black/60 rounded-full" />
 
                         </Link>
                     )}
                 </div>
-                    <Link to="/create-pin" className="bg-gray-800 rounded-md shadow-lg shadow-black/40 w-50 h-50 mr-4 hover:animate-ping">
+                    <Link to="/create-pin" className="bg-gray-800 rounded-md shadow-md shadow-black/40 w-50 h-50 mr-4 hover:animate-ping">
                         <IoIosAdd className="text-2xl text-cyan-600 font-extrabold w-8 h-8" />
                     </Link>
             </div>
