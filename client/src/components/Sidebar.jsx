@@ -3,7 +3,7 @@ import { NavLink, Link } from 'react-router-dom';
 import { AiFillCaretDown } from 'react-icons/ai';
 import { GiBleedingHeart } from 'react-icons/gi';
 //Categories
-import { categories } from '../utils/categories';
+import { categories } from '../utils/data';
 
 
 const isActiveStyles = "flex items-center gap-3 px-10 py-5 text-2xl bg-gray-300 font-extrabold text-pink-700 border-r-4 rounded-lg border-black shadow-lg transition-all duration-200 ease-in-out capitalize"

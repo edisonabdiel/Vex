@@ -6,6 +6,8 @@ import { useNavigate } from 'react-router-dom';
 import { client } from '../client';
 import Spinner from '../components/Spinner';
 
+import { categories } from '../utils/data';
+
 const CreatePin = ({ user }) => {
     const [title, setTitle] = useState('');
     const [about, setAbout] = useState('');
@@ -16,9 +18,8 @@ const CreatePin = ({ user }) => {
     const [image, setImage] = useState(null);
     const [wrongImageType, setWrongImageType] = useState(false);
 
-    console.log(user.image)
-
     const navigate = useNavigate();
+    console.log(user._id)
 
     const uplpoadImage = (e) => {
         const { type, name } = e.target.files[0];
@@ -26,7 +27,7 @@ const CreatePin = ({ user }) => {
             setLoading(true);
             setWrongImageType(false);
 
-            client.assets.upload('image', e.target.files[0], { contentType: type, fileName: name }).then(({ hash }) => {
+            client.assets.upload('image', e.target.files[0], { contentType: type, fileName: name }).then((hash) => {
                 setImage(hash);
                 setLoading(false);
             }).catch(err => {
@@ -37,10 +38,43 @@ const CreatePin = ({ user }) => {
         }
     };
 
+    const savePin = () => {
+        if (title && about && destination && category && image?._id) {
+            const doc = {
+                _type: 'pin',
+                title,
+                about,
+                destination,
+                category,
+                image: {
+                    _type: 'image',
+                    asset: {
+                        _type: 'refence',
+                        _ref: image._id
+                    }
+                },
+                userId: user._id,
+                postedBy: {
+                    _type: 'postedBy',
+                    _ref: user._id
+                }
+            };
+
+            client.create(doc).then(() => {
+                navigate('/');
+            })
+        } else {
+            setFields(true);
+            setTimeout(() => {
+                setFields(false);
+            }, 3000);
+
+        }
+    }
     return (
         <div className='flex flex-col justify-center items-center mt-5 lg:h-4/5'>
             {fields && (
-                <p className="text-red-500 mb-5 text-lx trnasition-all duration-150 easi-in">Please fill all the fields</p>
+                <p className="text-red-500 mb-5 text-2xl transition-all duration-150 ease-in">Please fill all the fields</p>
             )}
             <div className="flex lg:flex-row flex-col justify-center items-center bg-gray-200 rounded-md lg:p-5 p3 lg:w-4/5 w-full">
                 <div className="bg-gray-300 p-3 flex flex-0.7 w-full rounded-md shadow-md shadow-black/40">
@@ -70,12 +104,12 @@ const CreatePin = ({ user }) => {
                                 <img src={image?.url} alt="uploaded-pic" className="w-full h-full object-cover" />
                                 <button
                                     type="button"
-                                    className="absolute bottom-3 right-3 rounded-full bg-white text-xl cursor-pointer outline-none hover:shodow-md transition-all duration-500 ease-in-out"
+                                    className="absolute bottom-3 right-3 rounded-full bg-white text-3xl cursor-pointer outline-none shadow-md transition-all duration-500 ease-in-out"
                                     onClick={() => {
                                         setImage(null);
                                     }}
                                 >
-                                    <MdDelete className="text-red-500" />
+                                    <MdDelete className="text-red-600 m-1" />
                                 </button>
                             </div>
                         )}
@@ -108,12 +142,28 @@ const CreatePin = ({ user }) => {
                         <div>
                             <p className="font-semibold mb-2 text-lg sm:text-xl text-gray-400">Choose your item's category</p>
                             <select
-                                value={category}
                                 onChange={(e) => setCategory(e.target.value)}
                                 className="outline-none w-4/5 text-base text-gray-600 p-2 rounded-md shadow-md shadow-black/40 border-gray-400 p-2 bg-gray-300 cursor-pointer"
                             >
-                                <option></option>
+                                <option vlaue="other" className="bg-gray-200">Select a Category</option>
+                               
+                                    {categories?.map((category, index) => (
+                                        <option
+                                            key={index}
+                                            value={category.name}
+                                            className="bg-gray-200 text-base border-0 outline-none capitalize text-gray-600"
+                                        >
+                                            {category.name}
+                                        </option>
+                                    ))}
                             </select>
+                        </div>
+                        <div className="flex justify-end item-end mt-5">
+                            <button type="button"
+                                onClick={savePin}
+                                className="bg-green-500 text-gray-100 font-bold py-2 px-4 rounded-md shadow-md shadow-black/40">
+                                Save
+                            </button>
                         </div>
                     </div>
                     {user && (
