@@ -1,7 +1,7 @@
 import { NavLink, Link } from 'react-router-dom';
 //Icons
 import { AiFillCaretDown } from 'react-icons/ai';
-import { GiBleedingHeart } from 'react-icons/gi';
+import { GiHeartburn } from 'react-icons/gi';
 //Categories
 import { categories } from '../utils/data';
 
@@ -20,7 +20,7 @@ const Sidebar = ({ user, closeToggle }) => {
         <div className="flex flex-col justify-between bg-gray-200 p-2 mt-2 ml-2 overflow-y-scroll min-w-210 hide-scrollbar rounded-md">
             <div className="flex flex-col">
                 <Link to="/" className="flex justify-center px-5 gap-2 my-6 pt-1 w-190 items-center" onClick={handleCloseSidebar}>
-                    <GiBleedingHeart className="w-16 text-pink-700 text-8xl" />
+                    <GiHeartburn className="w-16 text-pink-700 text-8xl" />
                 </Link>
                 <div className="flex flex-col gap-5">
                     {/* {user && (

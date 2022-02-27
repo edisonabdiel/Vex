@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import { MdDownloadForOffline } from "react-icons/md";
 import { AiTwotoneDelete } from "react-icons/ai";
-import { BsFillArrowUpRightCircleFill } from "react-icons/bs";
+import { GiBleedingHeart } from "react-icons/gi";
 
 
 import { fetchUser } from '../utils/fetchUser';
@@ -67,9 +67,9 @@ const Pin = ({ pin: { postedBy, image, _id, destination, save } }) => {
                             {alreadySaved ? (
                                 <button
                                     type="button"
-                                    className="text-black font-extrabold text-base p-2 rounded-3xl text-2xl bg-green-500 opacity-50 hover:opacity-75 cursor-pointer hover:shadow-lg"
+                                    className="text-black font-extrabold text-base rounded-full text-2xl bg-green-500 opacity-50 hover:opacity-75 cursor-pointer hover:shadow-lg"
                                 >
-                                    {save?.length} Saved
+                                    <span className="evil-font">{save?.length}</span> <GiBleedingHeart className="text-2xl" />
                                 </button>
                             ) : (
                                 <button
@@ -79,9 +79,9 @@ const Pin = ({ pin: { postedBy, image, _id, destination, save } }) => {
                                     }
                                     }
                                     type="button"
-                                    className="text-black font-extrabold text-base px-5 py-1 rounded-3xl text-2xl bg-green-500 opacity-50 hover:opacity-75 cursor-pointer hover:shadow-lg"
+                                    className="text-black font-extrabold text-base px-2 py-2 rounded-full text-2xl bg-green-500 opacity-50 hover:opacity-75 cursor-pointer hover:shadow-lg"
                                 >
-                                    Save
+                                 <GiBleedingHeart className="text-2xl" />
                                 </button>
                             )}
                         </div>
@@ -123,7 +123,7 @@ const Pin = ({ pin: { postedBy, image, _id, destination, save } }) => {
                     src={postedBy?.image}
                     alt="user"
                 />
-                <p className="font-semibold capitalize text-gray-200 dev-name-font">{postedBy?.userName}</p>
+                <p className="font-semibold capitalize text-gray-200 evil-font">{postedBy?.userName}</p>
             </Link>
         </div>
     )
